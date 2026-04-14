@@ -1,0 +1,56 @@
+imfile_type: ".mhd"  # .mhd or .nii or .vtk / in specific cases specify with "xyz.mhd" or similar
+pattern: "mask.mhd"
+layer: 30  # isotropic padding [mm] to add to image that is reduced to bounding box
+
+el_size: 3.0  # FE voxel size in mm / standard: 3mm
+exp_config: 'stance'  # experimental configuration: stance, fall, from_file
+invert_anteropost_axis:  False  # Patient scanned lying on 1) belly --> True / 2) back --> False
+ftype: "iso"  # "iso" or "aniso" - no anisotropic implementation for the moment
+load_displacement_fall: # load displacement for fall BC
+  type: "rel"  # other option "rel"
+  value: -0.085    # standard for abs: -5 / standard for rel: -0.085
+load_displacement_stance:  # load displacement for stance BC
+  type: "rel"  # other option "rel"
+  value: -0.1   # standard for abs: -3  / standard for rel: -0.1
+dia_angle_fall: -30.0
+rot_angle: 0.0
+dia_angle_stance: -20.0
+sphere_vol: 27.0  # sphere for homogenization (defined by volume not diameter!)
+
+workdir: "/home/ygugler/Desktop/FEAMUR2020/Test"
+imdir:  "/home/ygugler/Desktop/FEAMUR2020/Test/1_Images/"
+feadir:  "/home/ygugler/Desktop/FEAMUR2020/Test/3_FEA"
+umat: null
+sumdir: "/home/ygugler/Desktop/FEAMUR2020/Test/4_Summaries"
+
+csv_file: "sample_ID/Laterality/Data/OutputClinicalParameters.csv"  # csv summary for 3D DXA images (else use None)
+
+parsing_pattern: '/|\_|\.'
+positions:
+  Sample_ID: 0
+  Laterality: 1
+  exp_config: 2
+
+abaqus: "/home/ygugler/Software/abaqus/6.13-2/code/bin/abq6132"
+nprocs: 4
+
+offscreen: True  # offscreen rendering (Mayavi)
+# headless_server: True  # running on headless server
+
+bmc_correction: True
+distal_extension: 50  # length (mm) or None
+
+distal_cut_length: 20  # cut location: int for fixed length from LT, float for fraction head diameter, None for cut at first complete section
+perpendicular_cut: True
+
+f_ult_criterion_fall: [0.075, "Center to GT"]  # or None
+f_ult_criterion_stance: null # or similar to above
+
+# this should be eliminated
+umat_parameters:
+  DENSFL: 0
+  VISCFL: 0
+  PYFL: 0  # should be set to 0
+
+keep_ODB: False  # True
+save_field_output: "SDV2"  # SDV2 is the scalar damage variable
