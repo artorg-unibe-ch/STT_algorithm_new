@@ -1,4 +1,4 @@
-# STTalgorithm
+# STT_algorithm_new
 Artorg-unibe-ch/STT_algorithm_new is the new version of the repository of paulacam/STTalgorithm, which again is a fork of the repository ygugler/FEAmurPYpeline. Ideally the code could be integrated back in the repository FEAmurPYpeline, so that bone strength computation and soft tissue thickness extraction from segmented abdominal CT scans could be performed using the same repository.
 
 The code from this repository was used for the paper submitted to 'Bone reports': Measuring trochanteric soft tissue thickness and its composition in CT scans: Development of a 3D method and its application to a dataset.
